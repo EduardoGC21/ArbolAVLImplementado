@@ -167,9 +167,15 @@ public class ArbolBinarioBusquedaAVL<T extends Comparable<T>> {
     public void checaFeviajaRaizBorra(NodoBBAVL<T> actual){
         //va subiendo a nodos papas y va actualizando las fes hasta la raiz.
         NodoBBAVL<T> papa;
-        while(actual!=raiz){
+        boolean bandera = false;
+        int feTemp;
+        while(actual!=raiz && bandera==false){
             papa = actual.getPapa();    
+            feTemp=papa.getFe();
             papa.setFe(calcularFE(papa));
+            if(feTemp==papa.getFe()){//si no cambio fe ya termina y no recorre hasta raiz
+                bandera=true;
+            }
             if(papa.getFe()==2 || papa.getFe()==-2){//checamos rotaciones
                 papa = rota(papa);
             }
@@ -219,8 +225,28 @@ public class ArbolBinarioBusquedaAVL<T extends Comparable<T>> {
         
         
     }
+    
+    public boolean find(T elemento) {
+        return findElem(elemento, raiz)!=null;
+    }
+    private NodoBBAVL<T> findElem(T elemento, NodoBBAVL<T> actual){
+        if(actual==null){
+            return null;
+        }
+        if(actual.getElemento().equals(elemento)){
+            return actual;
+        }
+        NodoBBAVL<T> res = findElem(elemento,actual.getIzq());
+        if(res==null){
+            res=findElem(elemento,actual.getDer());
+        }
+        return res;
+    }
     //metodo que inserta
     public void insertaAVL(T elemento){
+        if(find(elemento)){//no admite repetidos
+            return;
+        }
         NodoBBAVL<T> nuevo =inserta(elemento);//lo inserta y nos regresa el nodo
         checaFeviajaRaizInserta(nuevo);//mandamos ese nodo para actualizar las fes de los papas.
     }
@@ -387,6 +413,8 @@ public class ArbolBinarioBusquedaAVL<T extends Comparable<T>> {
         // gamma 1, -1 o 0 (3 casos)
         
         //asignamos nuevos nodos y colgamos
+        System.out.println("pruebaH");
+        System.out.println(actual.getPapa().getElemento());
         papa = actual.getPapa();
         alfa = actual;
         beta = actual.getIzq();
@@ -402,7 +430,7 @@ public class ArbolBinarioBusquedaAVL<T extends Comparable<T>> {
         alfa.cuelga2(C,'I');
         alfa.cuelga2(D, 'D');
         //si no hay papa es raiz
-        if(papa==null){
+        if(raiz==actual){
             raiz=gamma;
         }else{
             papa.cuelga(gamma);

@@ -5,7 +5,7 @@
 package AVL;
 
 import javax.swing.JFrame;
-
+import java.util.Random;
 /**
  *
  * @author eduar
@@ -13,43 +13,35 @@ import javax.swing.JFrame;
 public class pruebas {
     public static void main(String[] args) {
         ArbolBinarioBusquedaAVL<Integer> a1 = new ArbolBinarioBusquedaAVL<Integer>();
-        a1.insertaAVL(0);
-        a1.insertaAVL(10);
-        a1.insertaAVL(-10);
         a1.insertaAVL(100);
-        a1.insertaAVL(1000);
-        a1.insertaAVL(-100);
-        a1.insertaAVL(-50);
-        a1.insertaAVL(-5);
-        a1.insertaAVL(9);
-        a1.insertaAVL(5);
-        a1.insertaAVL(-20);
-        a1.insertaAVL(13);
-        a1.insertaAVL(39);
-        a1.insertaAVL(-150);
-        a1.insertaAVL(5000);
-        a1.insertaAVL(6000);
-        a1.insertaAVL(2);
-        
-        
-        /*
-        
-        
-        a1.borra(0);
-        a1.borra(-100);
-        a1.borra(100);
-        a1.borra(-50);
-        a1.borra(10);
-        a1.borra(1000);
-        a1.borra(-10);
-        a1.borra(-5);
-        a1.borra(5);
-        a1.borra(9);
-        a1.insertaAVL(100);
-        a1.insertaAVL(450);
+        a1.insertaAVL(300);
+        a1.insertaAVL(400);
+        a1.insertaAVL(50);
+        a1.insertaAVL(200);
+        a1.insertaAVL(250);
+        a1.insertaAVL(75);
+        a1.insertaAVL(350);
         a1.insertaAVL(500);
-        a1.borra(450);
-        */
+        a1.insertaAVL(375);
+        
+        
+        
+        a1.borra(500);
+        a1.borra(400);
+        a1.borra(200);
+        
+        Random random =  new Random();
+        int n;
+        for(int i=0; i<50;i++){
+            n=random.nextInt(0, 100);
+            System.out.println(n);
+            a1.insertaAVL(n);
+        }
+        
+        
+        
+
+        
         System.out.println("");
         System.out.println("");
         a1.imprimirPorNivel();
